@@ -28,7 +28,9 @@ export const menuItems: MenuItem[] = [
     price: 24,
     category: 'appetizers',
     image: 'https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg',
-    available: true
+    available: true,
+    preparationTime: 15,
+    allergens: ['gluten', 'sesame']
   },
   {
     id: '2',
@@ -57,7 +59,74 @@ export const menuItems: MenuItem[] = [
     price: 36,
     category: 'mains',
     image: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg',
-    available: true
+    available: true,
+    preparationTime: 25,
+    allergens: ['fish'],
+    options: [
+      {
+        id: 'cooking',
+        name: {
+          en: 'Cooking Preference',
+          he: 'העדפת בישול',
+          ar: 'تفضيل الطبخ',
+          ru: 'Предпочтение приготовления',
+          yi: 'קאָכן פּרעפֿערענץ',
+          am: 'የማብሰያ ምርጫ',
+          fr: 'Préférence de cuisson',
+          es: 'Preferencia de cocción',
+          de: 'Kochpräferenz'
+        },
+        type: 'single',
+        required: true,
+        choices: [
+          {
+            id: 'rare',
+            name: {
+              en: 'Rare',
+              he: 'נא',
+              ar: 'نادر',
+              ru: 'С кровью',
+              yi: 'זעלטן',
+              am: 'ብርቅ',
+              fr: 'Saignant',
+              es: 'Poco hecho',
+              de: 'Blutig'
+            },
+            price: 0
+          },
+          {
+            id: 'medium',
+            name: {
+              en: 'Medium',
+              he: 'בינוני',
+              ar: 'متوسط',
+              ru: 'Средней прожарки',
+              yi: 'מיטל',
+              am: 'መካከለኛ',
+              fr: 'À point',
+              es: 'Término medio',
+              de: 'Medium'
+            },
+            price: 0
+          },
+          {
+            id: 'well-done',
+            name: {
+              en: 'Well Done',
+              he: 'מבושל היטב',
+              ar: 'مطبوخ جيداً',
+              ru: 'Хорошо прожаренный',
+              yi: 'גוט געטאן',
+              am: 'በደንብ የተበሰለ',
+              fr: 'Bien cuit',
+              es: 'Bien hecho',
+              de: 'Durchgebraten'
+            },
+            price: 0
+          }
+        ]
+      }
+    ]
   },
   {
     id: '3',
@@ -86,7 +155,9 @@ export const menuItems: MenuItem[] = [
     price: 18,
     category: 'desserts',
     image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg',
-    available: true
+    available: true,
+    preparationTime: 12,
+    allergens: ['dairy', 'eggs', 'gluten']
   },
   {
     id: '4',
@@ -115,7 +186,136 @@ export const menuItems: MenuItem[] = [
     price: 8,
     category: 'beverages',
     image: 'https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg',
-    available: true
+    available: true,
+    preparationTime: 5,
+    options: [
+      {
+        id: 'size',
+        name: {
+          en: 'Size',
+          he: 'גודל',
+          ar: 'الحجم',
+          ru: 'Размер',
+          yi: 'גרייס',
+          am: 'መጠን',
+          fr: 'Taille',
+          es: 'Tamaño',
+          de: 'Größe'
+        },
+        type: 'single',
+        required: true,
+        choices: [
+          {
+            id: 'small',
+            name: {
+              en: 'Small (250ml)',
+              he: 'קטן (250מ"ל)',
+              ar: 'صغير (250مل)',
+              ru: 'Маленький (250мл)',
+              yi: 'קליין (250מל)',
+              am: 'ትንሽ (250ሚሊ)',
+              fr: 'Petit (250ml)',
+              es: 'Pequeño (250ml)',
+              de: 'Klein (250ml)'
+            },
+            price: 0
+          },
+          {
+            id: 'medium',
+            name: {
+              en: 'Medium (350ml)',
+              he: 'בינוני (350מ"ל)',
+              ar: 'متوسط (350مل)',
+              ru: 'Средний (350мл)',
+              yi: 'מיטל (350מל)',
+              am: 'መካከለኛ (350ሚሊ)',
+              fr: 'Moyen (350ml)',
+              es: 'Mediano (350ml)',
+              de: 'Mittel (350ml)'
+            },
+            price: 2
+          },
+          {
+            id: 'large',
+            name: {
+              en: 'Large (500ml)',
+              he: 'גדול (500מ"ל)',
+              ar: 'كبير (500مل)',
+              ru: 'Большой (500мл)',
+              yi: 'גרויס (500מל)',
+              am: 'ትልቅ (500ሚሊ)',
+              fr: 'Grand (500ml)',
+              es: 'Grande (500ml)',
+              de: 'Groß (500ml)'
+            },
+            price: 4
+          }
+        ]
+      },
+      {
+        id: 'ice',
+        name: {
+          en: 'Ice Preference',
+          he: 'העדפת קרח',
+          ar: 'تفضيل الثلج',
+          ru: 'Предпочтение льда',
+          yi: 'אייז פּרעפֿערענץ',
+          am: 'የበረዶ ምርጫ',
+          fr: 'Préférence de glace',
+          es: 'Preferencia de hielo',
+          de: 'Eispräferenz'
+        },
+        type: 'single',
+        required: false,
+        choices: [
+          {
+            id: 'no-ice',
+            name: {
+              en: 'No Ice',
+              he: 'ללא קרח',
+              ar: 'بدون ثلج',
+              ru: 'Без льда',
+              yi: 'קיין אייז',
+              am: 'በረዶ የለም',
+              fr: 'Sans glace',
+              es: 'Sin hielo',
+              de: 'Ohne Eis'
+            },
+            price: 0
+          },
+          {
+            id: 'light-ice',
+            name: {
+              en: 'Light Ice',
+              he: 'קרח קל',
+              ar: 'ثلج خفيف',
+              ru: 'Мало льда',
+              yi: 'ליכט אייז',
+              am: 'ቀላል በረዶ',
+              fr: 'Peu de glace',
+              es: 'Poco hielo',
+              de: 'Wenig Eis'
+            },
+            price: 0
+          },
+          {
+            id: 'regular-ice',
+            name: {
+              en: 'Regular Ice',
+              he: 'קרח רגיל',
+              ar: 'ثلج عادي',
+              ru: 'Обычный лед',
+              yi: 'רעגולער אייז',
+              am: 'መደበኛ በረዶ',
+              fr: 'Glace normale',
+              es: 'Hielo normal',
+              de: 'Normales Eis'
+            },
+            price: 0
+          }
+        ]
+      }
+    ]
   },
   {
     id: '5',
@@ -144,7 +344,9 @@ export const menuItems: MenuItem[] = [
     price: 42,
     category: 'mains',
     image: 'https://images.pexels.com/photos/6287380/pexels-photo-6287380.jpeg',
-    available: true
+    available: true,
+    preparationTime: 30,
+    allergens: ['dairy', 'gluten']
   },
   {
     id: '6',
@@ -173,6 +375,165 @@ export const menuItems: MenuItem[] = [
     price: 12,
     category: 'beverages',
     image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg',
-    available: true
+    available: true,
+    preparationTime: 8,
+    options: [
+      {
+        id: 'coffee-type',
+        name: {
+          en: 'Coffee Type',
+          he: 'סוג קפה',
+          ar: 'نوع القهوة',
+          ru: 'Тип кофе',
+          yi: 'קאַווע טיפּ',
+          am: 'የቡና አይነት',
+          fr: 'Type de café',
+          es: 'Tipo de café',
+          de: 'Kaffeetyp'
+        },
+        type: 'single',
+        required: true,
+        choices: [
+          {
+            id: 'espresso',
+            name: {
+              en: 'Espresso',
+              he: 'אספרסו',
+              ar: 'إسبريسو',
+              ru: 'Эспрессо',
+              yi: 'עספּרעססאָ',
+              am: 'ኤስፕሬሶ',
+              fr: 'Espresso',
+              es: 'Espresso',
+              de: 'Espresso'
+            },
+            price: 0
+          },
+          {
+            id: 'americano',
+            name: {
+              en: 'Americano',
+              he: 'אמריקנו',
+              ar: 'أمريكانو',
+              ru: 'Американо',
+              yi: 'אַמעריקאַנאָ',
+              am: 'አሜሪካኖ',
+              fr: 'Americano',
+              es: 'Americano',
+              de: 'Americano'
+            },
+            price: 1
+          },
+          {
+            id: 'cappuccino',
+            name: {
+              en: 'Cappuccino',
+              he: 'קפוצ\'ינו',
+              ar: 'كابتشينو',
+              ru: 'Капучино',
+              yi: 'קאַפּוטשינאָ',
+              am: 'ካፑቺኖ',
+              fr: 'Cappuccino',
+              es: 'Cappuccino',
+              de: 'Cappuccino'
+            },
+            price: 2
+          },
+          {
+            id: 'latte',
+            name: {
+              en: 'Latte',
+              he: 'לאטה',
+              ar: 'لاتيه',
+              ru: 'Латте',
+              yi: 'לאַטטע',
+              am: 'ላቴ',
+              fr: 'Latte',
+              es: 'Latte',
+              de: 'Latte'
+            },
+            price: 2
+          }
+        ]
+      },
+      {
+        id: 'milk-type',
+        name: {
+          en: 'Milk Type',
+          he: 'סוג חלב',
+          ar: 'نوع الحليب',
+          ru: 'Тип молока',
+          yi: 'מילך טיפּ',
+          am: 'የወተት አይነት',
+          fr: 'Type de lait',
+          es: 'Tipo de leche',
+          de: 'Milchtyp'
+        },
+        type: 'single',
+        required: false,
+        choices: [
+          {
+            id: 'regular',
+            name: {
+              en: 'Regular Milk',
+              he: 'חלב רגיל',
+              ar: 'حليب عادي',
+              ru: 'Обычное молоко',
+              yi: 'רעגולער מילך',
+              am: 'መደበኛ ወተት',
+              fr: 'Lait normal',
+              es: 'Leche normal',
+              de: 'Normale Milch'
+            },
+            price: 0
+          },
+          {
+            id: 'oat',
+            name: {
+              en: 'Oat Milk',
+              he: 'חלב שיבולת שועל',
+              ar: 'حليب الشوفان',
+              ru: 'Овсяное молоко',
+              yi: 'האָבער מילך',
+              am: 'የገብስ ወተት',
+              fr: 'Lait d\'avoine',
+              es: 'Leche de avena',
+              de: 'Hafermilch'
+            },
+            price: 1
+          },
+          {
+            id: 'almond',
+            name: {
+              en: 'Almond Milk',
+              he: 'חלב שקדים',
+              ar: 'حليب اللوز',
+              ru: 'Миндальное молоко',
+              yi: 'מאַנדל מילך',
+              am: 'የሎዝ ወተት',
+              fr: 'Lait d\'amande',
+              es: 'Leche de almendra',
+              de: 'Mandelmilch'
+            },
+            price: 1
+          },
+          {
+            id: 'soy',
+            name: {
+              en: 'Soy Milk',
+              he: 'חלב סויה',
+              ar: 'حليب الصويا',
+              ru: 'Соевое молоко',
+              yi: 'סויאַ מילך',
+              am: 'የሶያ ወተት',
+              fr: 'Lait de soja',
+              es: 'Leche de soja',
+              de: 'Sojamilch'
+            },
+            price: 1
+          }
+        ]
+      }
+    ]
   }
 ];

@@ -33,15 +33,28 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const addToCart = (item: MenuItem) => {
     setCartItems(prev => {
-      const existingItem = prev.find(cartItem => cartItem.id === item.id);
+      // For items with options, create unique identifiers
+      const itemKey = item.selectedOptions 
+        ? `${item.id}-${JSON.stringify(item.selectedOptions)}-${item.specialInstructions || ''}`
+        : item.id;
+      
+      const existingItem = prev.find(cartItem => {
+        const cartItemKey = cartItem.selectedOptions 
+          ? `${cartItem.id}-${JSON.stringify(cartItem.selectedOptions)}-${cartItem.specialInstructions || ''}`
+          : cartItem.id;
+        return cartItemKey === itemKey;
+      });
+      
       if (existingItem) {
         return prev.map(cartItem =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          (cartItem.selectedOptions 
+            ? `${cartItem.id}-${JSON.stringify(cartItem.selectedOptions)}-${cartItem.specialInstructions || ''}`
+            : cartItem.id) === itemKey
+            ? { ...cartItem, quantity: cartItem.quantity + (item.quantity || 1) }
             : cartItem
         );
       }
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: item.quantity || 1 }];
     });
   };
 
@@ -66,7 +79,24 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce((total, item) => {
+      let itemPrice = item.price;
+      
+      // Add option prices
+      if (item.selectedOptions && item.options) {
+        item.options.forEach(option => {
+          const selectedChoices = item.selectedOptions![option.id] || [];
+          selectedChoices.forEach(choiceId => {
+            const choice = option.choices.find(c => c.id === choiceId);
+            if (choice) {
+              itemPrice += choice.price;
+            }
+          });
+        });
+      }
+      
+      return total + (itemPrice * item.quantity);
+    }, 0);
   };
 
   const getTotalItems = () => {

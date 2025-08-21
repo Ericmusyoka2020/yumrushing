@@ -14,7 +14,10 @@ const Checkout: React.FC = () => {
   const [formData, setFormData] = useState<OrderForm>({
     tableNumber: '',
     customerName: '',
-    notes: ''
+    phoneNumber: '',
+    email: '',
+    notes: '',
+    orderType: 'cart'
   });
 
   useEffect(() => {
@@ -186,11 +189,56 @@ const Checkout: React.FC = () => {
                 />
               </motion.div>
 
-              {/* Special Notes */}
+              {/* Phone Number */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25 }}
+              >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <div className={`flex items-center space-x-2 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <User size={16} />
+                    <span>{t('phoneNumber')} *</span>
+                  </div>
+                </label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  required
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  placeholder="Your phone number"
+                />
+              </motion.div>
+
+              {/* Email */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
+              >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <div className={`flex items-center space-x-2 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <User size={16} />
+                    <span>{t('email')}</span>
+                  </div>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  placeholder="your.email@example.com"
+                />
+              </motion.div>
+
+              {/* Special Notes */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 }}
               >
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <div className={`flex items-center space-x-2 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>

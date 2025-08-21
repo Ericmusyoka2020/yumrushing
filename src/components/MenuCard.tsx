@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { Plus, Settings } from 'lucide-react';
 import { MenuItem } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
@@ -8,11 +8,14 @@ import { useCart } from '../contexts/CartContext';
 interface MenuCardProps {
   item: MenuItem;
   index: number;
+  onCustomize?: (item: MenuItem) => void;
 }
 
-const MenuCard: React.FC<MenuCardProps> = ({ item, index }) => {
+const MenuCard: React.FC<MenuCardProps> = ({ item, index, onCustomize }) => {
   const { language, t, isRTL } = useLanguage();
   const { addToCart } = useCart();
+
+  const hasOptions = item.options && item.options.length > 0;
 
   return (
     <motion.div
@@ -50,22 +53,45 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index }) => {
             {t(`categories.${item.category}`)}
           </span>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => addToCart(item)}
-            disabled={!item.available}
-            className={`
-              flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 rounded-lg font-medium transition-all duration-200
-              ${item.available
-                ? 'bg-gradient-to-r from-orange-500 to-teal-600 text-white hover:shadow-lg hover:from-orange-600 hover:to-teal-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }
-            `}
-          >
-            <Plus size={16} />
-            <span className="text-sm">{t('addToCart')}</span>
-          </motion.button>
+          <div className={`flex space-x-2 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
+            {hasOptions && onCustomize && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onCustomize(item)}
+                disabled={!item.available}
+                className={`
+                  flex items-center space-x-1 rtl:space-x-reverse px-3 py-2 rounded-lg font-medium transition-all duration-200
+                  ${item.available
+                    ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }
+                `}
+              >
+                <Settings size={14} />
+                <span className="text-sm">{t('customize')}</span>
+              </motion.button>
+            )}
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => hasOptions && onCustomize ? onCustomize(item) : addToCart(item)}
+              disabled={!item.available}
+              className={`
+                flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 rounded-lg font-medium transition-all duration-200
+                ${item.available
+                  ? 'bg-gradient-to-r from-orange-500 to-teal-600 text-white hover:shadow-lg hover:from-orange-600 hover:to-teal-700'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }
+              `}
+            >
+              <Plus size={16} />
+              <span className="text-sm">
+                {hasOptions && onCustomize ? t('customize') : t('addToCart')}
+              </span>
+            </motion.button>
+          </div>
         </div>
 
         {!item.available && (
