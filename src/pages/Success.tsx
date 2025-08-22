@@ -79,7 +79,7 @@ const Success: React.FC = () => {
                   {orderData && (
                     <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <span className="text-gray-600 dark:text-gray-400">Total:</span>
-                      <span className="font-bold text-orange-500">${orderData.totalAmount?.toFixed(2)}</span>
+                      <span className="font-bold text-orange-500">Order Confirmed</span>
                     </div>
                   )}
                 </div>

@@ -8,9 +8,8 @@ import CartItem from '../components/CartItem';
 
 const Cart: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { cartItems, getTotalPrice, getTotalItems } = useCart();
+  const { cartItems, getTotalItems } = useCart();
 
-  const totalPrice = getTotalPrice();
   const totalItems = getTotalItems();
 
   if (cartItems.length === 0) {
@@ -92,18 +91,10 @@ const Cart: React.FC = () => {
               <div className="space-y-3 mb-6">
                 <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <span className="text-gray-600 dark:text-gray-400">Items ({totalItems})</span>
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    ${totalPrice.toFixed(2)}
-                  </span>
                 </div>
                 <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <span className="text-gray-600 dark:text-gray-400">Service</span>
                   <span className="font-semibold text-gray-900 dark:text-white">Free</span>
-                </div>
-                <hr className="dark:border-gray-600" />
-                <div className={`flex justify-between text-lg font-bold ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <span className="text-gray-900 dark:text-white">{t('total')}</span>
-                  <span className="text-orange-500">${totalPrice.toFixed(2)}</span>
                 </div>
               </div>
 

@@ -39,9 +39,6 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, onCustomize }) => {
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
             {item.name[language]}
           </h3>
-          <span className="text-2xl font-bold text-orange-500 ml-2 rtl:ml-0 rtl:mr-2">
-            ${item.price}
-          </span>
         </div>
 
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-2">
@@ -54,29 +51,11 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, onCustomize }) => {
           </span>
 
           <div className={`flex space-x-2 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {hasOptions && onCustomize && (
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onCustomize(item)}
-                disabled={!item.available}
-                className={`
-                  flex items-center space-x-1 rtl:space-x-reverse px-3 py-2 rounded-lg font-medium transition-all duration-200
-                  ${item.available
-                    ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  }
-                `}
-              >
-                <Settings size={14} />
-                <span className="text-sm">{t('customize')}</span>
-              </motion.button>
-            )}
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => hasOptions && onCustomize ? onCustomize(item) : addToCart(item)}
+              onClick={() => addToCart(item)}
               disabled={!item.available}
               className={`
                 flex items-center space-x-2 rtl:space-x-reverse px-4 py-2 rounded-lg font-medium transition-all duration-200
@@ -88,7 +67,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item, index, onCustomize }) => {
             >
               <Plus size={16} />
               <span className="text-sm">
-                {hasOptions && onCustomize ? t('customize') : t('addToCart')}
+                {t('addToCart')}
               </span>
             </motion.button>
           </div>

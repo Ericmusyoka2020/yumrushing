@@ -7,7 +7,6 @@ interface CartContextType {
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
-  getTotalPrice: () => number;
   getTotalItems: () => number;
 }
 
@@ -78,26 +77,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setCartItems([]);
   };
 
-  const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => {
-      let itemPrice = item.price;
-      
-      // Add option prices
-      if (item.selectedOptions && item.options) {
-        item.options.forEach(option => {
-          const selectedChoices = item.selectedOptions![option.id] || [];
-          selectedChoices.forEach(choiceId => {
-            const choice = option.choices.find(c => c.id === choiceId);
-            if (choice) {
-              itemPrice += choice.price;
-            }
-          });
-        });
-      }
-      
-      return total + (itemPrice * item.quantity);
-    }, 0);
-  };
 
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -110,7 +89,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       removeFromCart,
       updateQuantity,
       clearCart,
-      getTotalPrice,
       getTotalItems
     }}>
       {children}

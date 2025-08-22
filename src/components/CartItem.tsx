@@ -34,9 +34,11 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           <h4 className="font-semibold text-gray-900 dark:text-white truncate">
             {item.name[language]}
           </h4>
-          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-            ${item.price} each
-          </p>
+          {item.specialInstructions && (
+            <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+              {item.specialInstructions}
+            </p>
+          )}
         </div>
 
         <div className={`flex items-center space-x-3 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -64,11 +66,6 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             </motion.button>
           </div>
 
-          <div className="text-right rtl:text-left">
-            <div className="font-bold text-lg text-gray-900 dark:text-white">
-              ${(item.price * item.quantity).toFixed(2)}
-            </div>
-          </div>
 
           <motion.button
             whileHover={{ scale: 1.1 }}

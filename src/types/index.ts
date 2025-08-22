@@ -2,7 +2,6 @@ export interface MenuItem {
   id: string;
   name: Record<string, string>;
   description: Record<string, string>;
-  price: number;
   category: string;
   image: string;
   available: boolean;
@@ -22,7 +21,6 @@ export interface MenuItemOption {
 export interface OptionChoice {
   id: string;
   name: Record<string, string>;
-  price: number;
 }
 
 export interface CartItem extends MenuItem {
@@ -34,18 +32,7 @@ export interface CartItem extends MenuItem {
 export interface OrderForm {
   tableNumber: string;
   customerName: string;
-  phoneNumber: string;
-  email?: string;
   notes: string;
-  orderType: 'cart' | 'quick';
-  estimatedTime?: number;
-}
-
-export interface QuickOrderItem {
-  itemName: string;
-  quantity: number;
-  specifications: string;
-  estimatedPrice: number;
 }
 
 export type Language = 'en' | 'he' | 'ar' | 'ru' | 'yi' | 'am' | 'fr' | 'es' | 'de';

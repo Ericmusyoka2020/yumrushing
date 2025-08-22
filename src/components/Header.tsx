@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingCart, Sun, Moon, Languages, QrCode } from 'lucide-react';
+import { ShoppingCart, Sun, Moon, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useCart } from '../contexts/CartContext';
@@ -13,7 +13,6 @@ const Header: React.FC = () => {
   const { getTotalItems } = useCart();
   const location = useLocation();
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
-  const [showQRScanner, setShowQRScanner] = useState(false);
 
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -27,13 +26,6 @@ const Header: React.FC = () => {
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
   ];
 
-  const handleQRScan = () => {
-    const tableNumber = prompt(t('scanQR'));
-    if (tableNumber) {
-      sessionStorage.setItem('tableNumber', tableNumber);
-      alert(`Table ${tableNumber} selected!`);
-    }
-  };
 
   const totalItems = getTotalItems();
 
@@ -89,16 +81,6 @@ const Header: React.FC = () => {
 
           {/* Controls */}
           <div className={`flex items-center space-x-4 rtl:space-x-reverse ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {/* QR Scanner */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleQRScan}
-              className="p-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 transition-colors"
-              title={t('scanQR')}
-            >
-              <QrCode size={20} />
-            </motion.button>
 
             {/* Theme Toggle */}
             <motion.button
